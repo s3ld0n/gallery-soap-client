@@ -1,8 +1,6 @@
 package gallery.soap.consuming.client;
 
-import gallery.soap.consuming.wsdl.GetWorkRequest;
-import gallery.soap.consuming.wsdl.GetWorkResponse;
-import gallery.soap.consuming.wsdl.ObjectFactory;
+import gallery.soap.consuming.wsdl.*;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 public class WorkClient extends WebServiceGatewaySupport {
@@ -13,6 +11,16 @@ public class WorkClient extends WebServiceGatewaySupport {
         request.setTitle(title);
 
         GetWorkResponse response = (GetWorkResponse) getWebServiceTemplate()
+                                                 .marshalSendAndReceive("http://localhost:9090/ws/", request);
+        return response;
+    }
+
+    public AddWorkResponse addWork(Work work) {
+        AddWorkRequest request = new ObjectFactory().createAddWorkRequest();
+
+        request.setWork(work);
+
+        AddWorkResponse response = (AddWorkResponse) getWebServiceTemplate()
                                                  .marshalSendAndReceive("http://localhost:9090/ws/", request);
         return response;
     }
