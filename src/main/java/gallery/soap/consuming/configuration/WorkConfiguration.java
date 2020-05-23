@@ -1,6 +1,7 @@
 package gallery.soap.consuming.configuration;
 
 import gallery.soap.consuming.client.WorkClient;
+import gallery.soap.consuming.wsdl.ObjectFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -22,5 +23,10 @@ public class WorkConfiguration {
         workClient.setMarshaller(marshaller);
         workClient.setUnmarshaller(marshaller);
         return workClient;
+    }
+
+    @Bean
+    public ObjectFactory objectFactory() {
+        return new ObjectFactory();
     }
 }
